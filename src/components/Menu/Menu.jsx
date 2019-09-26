@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     card: {
         display: 'flex',
         // minWidth: 275,
-        minWidth: '528px',
+        // minWidth: '528px',
         height: '145px',
         backgroundColor: '#283241',
         justifyContent: 'space-between',
@@ -35,9 +35,51 @@ const useStyles = makeStyles({
       }
 })
 
+const page1 = {
+    title:'page1',
+    description:'description for page1',
+    icon:'',
+    route:'',
+    component:''
+}
+const page2 = {
+    title:'page2',
+    description:'description for page2',
+    icon:'',    
+    route:'',
+    component:''
+}
+const pages = [page1,page2];
+
 
 function Menu(props) {
     const classes = useStyles();
+    // const {pages} = props;
+    const pagetest = pages;
+    const menu = pagetest.map(page=>(
+            <Grid item md={6} xs={12} >
+                <Card className={classes.card}>
+                    <div className={classes.icon}>
+                        <SettingsIcon></SettingsIcon>
+                    {page.icon}
+                    </div>
+                    <CardContent className={classes.content}>
+                        <div>  
+                        {/* style={{maxWidth:'500px'}}> */}
+                        <Typography component="h5" variant="h5" style={{color:'#7FBBE2'}} align="left" noWrap>
+                            Heading {page.title}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary" align="left" >
+                            {page.description}
+                        </Typography>
+                        </div>
+                    </CardContent>
+                    <div className={classes.circle}>
+                        1
+                    </div>
+                </Card>
+            </Grid>
+    ))
     return (
         <Grid container spacing={6}>
             <Grid item md={6} xs={12} >
@@ -47,7 +89,8 @@ function Menu(props) {
 
                 </div>
                 <CardContent className={classes.content}>
-                <div style={{maxWidth:'500px'}}>
+                <div>  
+                {/* style={{maxWidth:'500px'}}> */}
                 <Typography component="h5" variant="h5" style={{color:'#7FBBE2'}} align="left" noWrap>
                     Heading
                 </Typography>
@@ -77,28 +120,8 @@ function Menu(props) {
                 <span>1</span>
                 </div>
                 </Card>
-            </Grid>    
-            <Grid item md={6} xs={12} >
-                <Card className={classes.card}>
-                <div>
-                <SettingsIcon></SettingsIcon>
-
-                </div>
-                <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5" style={{color:'#7FBBE2'}}>
-                    Heading
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-            Description
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          </Typography>
-                </CardContent>
-                <div className={classes.circle}>
-                    1
-                </div>
-                </Card>
-            </Grid>       
+            </Grid>
+            {menu}   
         </Grid>
     )
 }

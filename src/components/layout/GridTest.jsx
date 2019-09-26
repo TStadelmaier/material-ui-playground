@@ -10,9 +10,13 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { classes } from 'istanbul-lib-coverage';
 import Menu from '../Menu/Menu';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import CustomizedBreadcrumbs from '../BreadCrumb';
+import { Switch, Route } from 'react-router-dom';
+import Jobs from '../Jobs';
 
-
-const drawerWidth = 240;
+const drawerWidth = 280;
+const navWidth = 300;
 
 const useStyles = makeStyles(theme => ({
 
@@ -37,12 +41,12 @@ const useStyles = makeStyles(theme => ({
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
+            width: navWidth,
             flexShrink: 0,
         },
     },
     appBar: {
-        marginLeft: drawerWidth,
+        marginLeft: navWidth,
         zIndex: theme.zIndex.drawer + 1,
         // [theme.breakpoints.up('sm')]: {
         //   width: `calc(100% - ${drawerWidth}px)`,
@@ -58,6 +62,7 @@ const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
+        // overflowY: '',
     },
     content: {
         flexGrow: 1,
@@ -85,52 +90,57 @@ const useStyles = makeStyles(theme => ({
         zIndex: theme.zIndex.drawer + 1,
         backgroundColor: 'rgb(47, 56, 71)'
     },
-    listItem: {
-        root: {
-            '&$selsected': {
-                color: '#006FB7',
-            },
-            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-            borderRadius: 3,
-            border: 0,
-            color: 'white',
-            height: 48,
-            padding: '0 30px',
-            boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-            // $disabled is a reference to the local disabled
-            // rule within the same style sheet.
-            // By using &, we increase the specificity.
-            '&$disabled': {
-                background: 'rgba(0, 0, 0, 0.12)',
-                color: 'white',
-                boxShadow: 'none',
-            },
+    listItemRoot: {
+        '&:hover': {
+            background: '#rgba(127, 187, 226, 0.37)'
         },
-        disabled: {},
-
-        selected: {},
-        // selected:{
-        //     backgroundColor:'#006FB7'
-        // }
+        '&$selected': {
+            background: '#006FB7',
+            // backgroundColor: '#006FB7',
+            '&:hover': {
+                background: '#006FB7',
+            },
+            '&::after': {
+                content: '""',
+                left: '100%',
+                width: '',
+                height: '0',
+                borderTop: '25px solid transparent',
+                borderBottom: '25px solid transparent',
+                borderLeft: '15px solid #016fb7',
+                position: 'absolute',
+            }
+        },
+        // $disabled is a reference to the local disabled
+        // rule within the same style sheet.
+        // By using &, we increase the specificity.
+        '&$disabled': {
+            background: 'rgba(0, 0, 0, 0.12)',
+            color: 'white',
+            boxShadow: 'none',
+        }
     },
     paper: {
         padding: theme.spacing(6)
     },
+    disabled: {},
 
-
+    selected: {},
+    hover: {},
+    after: {},
 }));
 
 
 
 
-function GridTest(props) {
+function GridTest(props,{match}) {
     const { container } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [open, setOpen] = React.useState(true);
     const [value, setValue] = React.useState(0);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     function handleMobileDrawerToggle() {
         setMobileOpen(!mobileOpen);
@@ -149,12 +159,12 @@ function GridTest(props) {
             <div className={classes.toolbar} />
             {/* <Divider /> */}
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}
+                {['Inbox', 'Starred', 'Send email', 'Drafts', 'All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem key={text}
                         // className={classes.listItem}
                         classes={{
-                            root: classes.listItem.root,
-                            selected: classes.listItem.selected,
+                            root: classes.listItemRoot,
+                            selected: classes.selected,
                         }}
                         selected={selectedIndex === index}
                         onClick={event => handleListItemClick(event, index)}>
@@ -164,10 +174,13 @@ function GridTest(props) {
                     </ListItem>
                 ))}
             </List>
-            {/* <Divider />
-            <List>
+            {/* <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}
+                    classes={{
+                            root: classes.listItemRoot,
+                            selected: classes.selected,
+                        }}
                     selected={selectedIndex === index}
                     onClick={event => handleListItemClick(event, index)}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -180,7 +193,8 @@ function GridTest(props) {
 
     return (
         <div>
-            <Grid container direction="column" spacing={0}
+            <CssBaseline />
+            <Grid container direction="column" spacing={6}
                 // style={{ flexWrap: 'nowrap', height: '100vh' }}
                 className={classes.root}
             >
@@ -220,43 +234,47 @@ function GridTest(props) {
                 <Grid item className={classes.mainContent}>
                     <nav className={classes.drawer} aria-label="mailbox folders">
                         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                        <Hidden smUp implementation="js">
-                            <Drawer
-                                container={container}
-                                variant="temporary"
-                                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                                open={mobileOpen}
-                                onClose={handleMobileDrawerToggle}
-                                classes={{
-                                    paper: classes.drawerPaper,
-                                }}
-                                ModalProps={{
-                                    keepMounted: true, // Better open performance on mobile.
-                                }}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                        <Hidden xsDown implementation="js">
-                            <Drawer
-                                classes={{
-                                    paper: classes.drawerPaper,
-                                }}
-                                variant="persistent"
-                                open={open}
-                                onClose={handleDrawerToggle}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
+                        <div>
+                            {/* style={{width:'300px'}}> */}
+                            <Hidden smUp implementation="js">
+                                <Drawer
+                                    container={container}
+                                    variant="temporary"
+                                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                                    open={mobileOpen}
+                                    onClose={handleMobileDrawerToggle}
+                                    classes={{
+                                        paper: classes.drawerPaper,
+                                    }}
+                                    ModalProps={{
+                                        keepMounted: true, // Better open performance on mobile.
+                                    }}
+                                >
+                                    {drawer}
+                                </Drawer>
+                            </Hidden>
+                            <Hidden xsDown implementation="js">
+                                <Drawer
+                                    classes={{
+                                        paper: classes.drawerPaper,
+                                    }}
+                                    variant="persistent"
+                                    open={open}
+                                    onClose={handleDrawerToggle}
+                                >
+                                    {drawer}
+                                </Drawer>
+                            </Hidden>
+                        </div>
                     </nav>
 
                     <main className={clsx(classes.content, {
                         [classes.contentShift]: open,
                     })}>
                         <div className={classes.toolbar} />
+
                         {/* <Paper className={classes.paper.root}> */}
-                            {/* <Typography paragraph>
+                        {/* <Typography paragraph>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                                 ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
                                 facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
@@ -279,7 +297,7 @@ function GridTest(props) {
                                 nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
                                 accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
                         </Typography> */}
-                            {/* <Typography paragraph>
+                        {/* <Typography paragraph>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                                 ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
                                 facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
@@ -417,7 +435,15 @@ function GridTest(props) {
                                 nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
                                 accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
                         </Typography> */}
-                            <Menu></Menu>
+                        {/* <CustomizedBreadcrumbs /> */}
+                        <Menu></Menu>
+                        {/* <Switch> */}
+                            {/* <Route path={match.url} exact component={Menu} /> */}
+                            {/* <Route path="/" exact component={Menu} /> */}
+                            {/* <Route path={`${match.url}/test`} exact component={CustomizedBreadcrumbs} /> */}
+                            {/* <Route path="/test" exact component={CustomizedBreadcrumbs} /> */}
+                            {/* <Route path="/jobs" exact component={Jobs} /> */}
+                        {/* </Switch> */}
                         {/* </Paper> */}
                     </main>
                 </Grid>

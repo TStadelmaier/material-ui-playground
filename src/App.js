@@ -4,15 +4,28 @@ import './App.css';
 import BaseLayout from './components/layout/BaseLayout';
 import GridBaseLayout from './components/layout/GridBaseLayout';
 import GridTest from './components/layout/GridTest';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 // import darkBaseTheme from '@material-ui/styles/baseThemes/darkBaseTheme';
 // import * as Colors from '@material-ui/styles/colors';
 // import { fade } from '@material-ui/utils/colorManipulator';
 import { MuiThemeProvider } from '@material-ui/core';
 import { classes } from 'istanbul-lib-coverage';
+import {Switch, Route}from 'react-router-dom';
+import Menu from './components/Menu/Menu';
 
 const libelleDarkTheme = () => {
   let overwrites = {
+      MuiCssBaseline: {
+        '@global': {
+          '*': {
+            'scrollbar-width': 'thin',
+          },
+          '*::webkit-scrollbar': {
+            width: 220,
+            height: 4,
+          },
+        },
+      },
     "palette": {
       // 'type': 'dark',
       "primary1Color": "#1e88e5",
@@ -74,8 +87,20 @@ const dark = {
     }
   },
   overrides: {
-   
-
+    MuiCssBaseline: {
+      '@global': {
+        '*::-webkit-scrollbar': {
+          width: '0.4em'
+        },
+        '*::-webkit-scrollbar-track': {
+          '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(0,0,0,.1)',
+          outline: '1px solid slategrey'
+        }
+      },
+    },
   },
 }
 
@@ -85,6 +110,10 @@ function App() {
   return (
     <MuiThemeProvider theme={darkTheme}>
       <div className="App">
+      {/* <Switch> */}
+        <Route path="/" component={GridTest} />
+        {/* <Route path="/menu" component={Menu}></Route> */}
+      {/* </Switch> */}
         {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -101,7 +130,7 @@ function App() {
       </header> */}
         {/* <BaseLayout/> */}
         {/* <GridBaseLayout/> */}
-        <GridTest />
+        {/* <GridTest /> */}
       </div>
     </MuiThemeProvider>
   );

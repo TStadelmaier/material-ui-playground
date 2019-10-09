@@ -16,7 +16,7 @@ import { Switch, Route } from 'react-router-dom';
 import Jobs from '../Jobs';
 
 const drawerWidth = 280;
-const navWidth = 300;
+const navWidth = 280;
 
 const useStyles = makeStyles(theme => ({
 
@@ -133,8 +133,8 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function GridTest(props,{match}) {
-    const { container } = props;
+function GridTest(props) {
+    const { container, mainArea } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -193,8 +193,7 @@ function GridTest(props,{match}) {
 
     return (
         <div>
-            <CssBaseline />
-            <Grid container direction="column" spacing={6}
+            <Grid container direction="column" spacing={0}
                 // style={{ flexWrap: 'nowrap', height: '100vh' }}
                 className={classes.root}
             >
@@ -297,152 +296,18 @@ function GridTest(props,{match}) {
                                 nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
                                 accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
                         </Typography> */}
-                        {/* <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography>
-                            <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography>
-                            <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography>
-                            <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography>
-                            <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography>
-                            <Typography paragraph>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                                facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                                gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                                donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                                adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                                Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                                imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                                arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                                donec massa sapien faucibus et molestie ac.
-                        </Typography>
-                            <Typography paragraph>
-                                Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                                facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                                tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                                consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                                vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                                hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                                tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                                nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                                accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                        </Typography> */}
-                        {/* <CustomizedBreadcrumbs /> */}
-                        <Menu></Menu>
+                        
+                        <CustomizedBreadcrumbs />
+                        {/* {props.children} */}
+                        {mainArea}
+                        {/* <Menu></Menu> */}
                         {/* <Switch> */}
                             {/* <Route path={match.url} exact component={Menu} /> */}
                             {/* <Route path="/" exact component={Menu} /> */}
-                            {/* <Route path={`${match.url}/test`} exact component={CustomizedBreadcrumbs} /> */}
+                            {/* <Route path={`${match.path}test`}  component={CustomizedBreadcrumbs} /> */}
                             {/* <Route path="/test" exact component={CustomizedBreadcrumbs} /> */}
                             {/* <Route path="/jobs" exact component={Jobs} /> */}
+                            {/* <Route path={`${match.url}jobs`}  component={Jobs} /> */}
                         {/* </Switch> */}
                         {/* </Paper> */}
                     </main>

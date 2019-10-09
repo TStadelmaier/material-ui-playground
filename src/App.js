@@ -12,6 +12,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { classes } from 'istanbul-lib-coverage';
 import {Switch, Route}from 'react-router-dom';
 import Menu from './components/Menu/Menu';
+import LayoutTest from './components/LayoutTest';
 
 const libelleDarkTheme = () => {
   let overwrites = {
@@ -111,7 +112,7 @@ function App() {
     <MuiThemeProvider theme={darkTheme}>
       <div className="App">
       {/* <Switch> */}
-        <Route path="/" component={GridTest} />
+        <Route path="/" component={LayoutTest} />
         {/* <Route path="/menu" component={Menu}></Route> */}
       {/* </Switch> */}
         {/* <header className="App-header">

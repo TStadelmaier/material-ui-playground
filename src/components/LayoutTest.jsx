@@ -8,7 +8,7 @@ import Jobs from './Jobs';
 
 function LayoutTest(props) {
     return (
-        <GridTest mainArea = {
+        <GridTest {...props} mainArea = {
              <Switch>
                 <Route path={props.match.url} exact component={Menu} />
                 {/* <Route path="/" exact component={Menu} /> */}
@@ -16,6 +16,8 @@ function LayoutTest(props) {
                 {/* <Route path="/test" exact component={CustomizedBreadcrumbs} /> */}
                 {/* <Route path="/jobs" exact component={Jobs} /> */}
                 <Route path={`${props.match.url}jobs`} component={Jobs} />
+                <Route path={`${props.match.url}jobs/bla`} component={Jobs} />
+                {/* <Route path={`${props.match.url}jobs/:id`} component={Job} /> */}
             </Switch>
         }
         

@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import NavLink from './NavLink';
 import Grid from '@material-ui/core/Grid';
+import { elementType } from "prop-types";
 
 const StyledBreadcrumb = withStyles(theme => ({
     root: {
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function DropDownSeparator() {
+export function DropDownSeparator(props) {
     return (
         <Tooltip
             title={
@@ -70,14 +71,28 @@ export function DropDownSeparator() {
     );
 }
 
-export default function CustomizedBreadcrumbs() {
+export default function CustomizedBreadcrumbs(props) {
     const classes = useStyles();
+    const {location} = props;
+
+    let elements = location.pathname.length === 1 ?
+     <NavLink className={classes.Link} to='/'>Home</NavLink>
+     : location.pathname.split('/').map(element=> (
+        element === '' ?
+         <NavLink className={classes.Link} to='/'>Home</NavLink>
+         : <NavLink className={classes.Link} to={location.pathname.split(element)[0] + element}>{element}</NavLink>
+    ));
 
     return (
         <Grid container spacing={6}>
             <Grid item md={6} xs={12} >
                 {/* <Paper elevation={0} className={classes.root}> */}
                 <Breadcrumbs separator={<DropDownSeparator />} aria-label="breadcrumb">
+
+
+
+                {elements}
+
                     {/* <StyledBreadcrumb
           component="a"
           href="#"
@@ -85,7 +100,7 @@ export default function CustomizedBreadcrumbs() {
           icon={<HomeIcon fontSize="small" />}
           onClick={handleClick}
         /> */}
-                    <Link className={classes.link}>Home</Link>
+                    {/* <Link className={classes.link}>Home</Link> */}
                     {/* <StyledBreadcrumb
           component="a"
           href="#"
@@ -93,15 +108,17 @@ export default function CustomizedBreadcrumbs() {
           onClick={handleClick}
         /> */}
                     {/* <Link className={classes.link} href={'/'}>Monitor</Link> */}
-                    <NavLink className={classes.link} to={'/'}>Monitor</NavLink>
+                    {/* <NavLink className={classes.link} to={'/'}>Monitor</NavLink> */}
                     {/* <StyledBreadcrumb
           label="Accessories"
           deleteIcon={<ExpandMoreIcon />}
           onClick={handleClick}
           onDelete={handleClick}
         /> */}
-                    <Link className={classes.linkActive} href='/'>Jobs</Link>
-                    <NavLink className={classes.linkActive} to={'/jobs'}>Jobs</NavLink>
+                    {/* <Link className={classes.linkActive} href='/'>Jobs</Link> */}
+                    <br/>
+                    <NavLink className={classes.linkActive} to={'jobs'}>Jobs</NavLink>
+                    <NavLink className={classes.linkActive} to={'jobs/bla'}>bla</NavLink>
                 </Breadcrumbs>
                 {/* </Paper> */}
             </Grid>

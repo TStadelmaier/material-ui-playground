@@ -297,7 +297,7 @@ function GridTest(props) {
                                 accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
                         </Typography> */}
                         
-                        <CustomizedBreadcrumbs />
+                        <CustomizedBreadcrumbs {...props}/>
                         {/* {props.children} */}
                         {mainArea}
                         {/* <Menu></Menu> */}
